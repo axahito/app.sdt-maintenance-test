@@ -13,7 +13,12 @@ const RequestCard = ({ request }: Props) => {
   const { handleResolve } = useRequests();
 
   const onClick = async () => {
-    await handleResolve(request.id);
+    try {
+      await handleResolve(request.id);
+    } catch (error) {
+      console.log(error);
+      alert("Error resolving request. please try again.");
+    }
   };
 
   return (

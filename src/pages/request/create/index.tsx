@@ -1,3 +1,4 @@
+import Snackbar from "@/components/Snackbar";
 import { useRequests } from "@/hooks/useRequests";
 import { RequestObjectPayload } from "@/types/request";
 import React from "react";
@@ -44,7 +45,6 @@ const CreateRequest = () => {
   } = useForm<RequestObjectPayload>();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     const payload = {
       title: data.title,
       status: data.status || "OPEN",
@@ -52,14 +52,19 @@ const CreateRequest = () => {
       description: data.description,
     };
 
-    await handleCreate(payload);
-    window.location.href = "/request";
+    try {
+      await handleCreate(payload);
+      window.location.href = "/request";
+    } catch (error) {
+      console.log(error);
+      alert("Error creating request. please try again.");
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full px-[37.5px] pt-[25px] font-inter"
+      className="w-full h-full lg:w-[46dvw] px-[37.5px] pt-[25px] font-inter"
     >
       <div className="space-y-[25px]">
         <div className="space-y-2">
@@ -116,21 +121,6 @@ const CreateRequest = () => {
           />
           {errors.urgency && (
             <p className="text-red-500 text-sm">{errors.urgency.message}</p>
-          )}
-        </div>
-
-        <div className="space-y-2">
-          <label className="block text-sm font-normal text-[#A1AFC3]">
-            Title *
-          </label>
-          <input
-            type="text"
-            placeholder="Title"
-            {...register("title", { required: "Title is required" })}
-            className="w-full py-[14px] px-4 rounded-xl text-sm font-normal text-sdt-text-black shadow-lg"
-          />
-          {errors.title && (
-            <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
         </div>
 
@@ -193,6 +183,21 @@ const CreateRequest = () => {
 
         <div className="space-y-2">
           <label className="block text-sm font-normal text-[#A1AFC3]">
+            Title *
+          </label>
+          <input
+            type="text"
+            placeholder="Title"
+            {...register("title", { required: "Title is required" })}
+            className="w-full py-[14px] px-4 rounded-xl text-sm font-normal text-sdt-text-black shadow-lg"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm">{errors.title.message}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-normal text-[#A1AFC3]">
             Description
           </label>
           <textarea
@@ -204,7 +209,6 @@ const CreateRequest = () => {
           )}
         </div>
       </div>
-
       <button
         type="submit"
         disabled={!isValid}

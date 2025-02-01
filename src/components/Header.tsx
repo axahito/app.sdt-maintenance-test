@@ -6,18 +6,14 @@ import React from "react";
 const Header = () => {
   const router = useRouter();
   const isRequestPage = router.pathname.endsWith("/request");
-  console.log({
-    isRequestPage,
-    router,
-  });
 
   return (
     <header className="w-full h-[6.75rem] lg:h-[8.16rem] flex items-end justify-center pb-[14px]">
-      <span className="flex items-center w-full relative">
+      <span className="flex items-center w-full lg:w-[46dvw] relative">
         {!isRequestPage && (
           <Link
             href="/request"
-            className="text-sdt-text-black mr-auto ml-5 cursor-pointer absolute"
+            className="text-sdt-text-black mr-auto ml-5 lg:left-[25%] cursor-pointer absolute"
           >
             <svg
               width="15"

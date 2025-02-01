@@ -1,4 +1,3 @@
-// hooks/useRequests.ts
 import { useQuery, useSubscription, useMutation } from "@apollo/client";
 import {
   CREATE_REQUEST,
@@ -7,8 +6,11 @@ import {
   RESOLVE_REQUEST,
 } from "../services/graphql";
 import { RequestObjectPayload } from "@/types/request";
+import { useState } from "react";
 
 export function useRequests() {
+  const [mutationError, setMutationError] = useState();
+  
   const { data, loading, error, refetch } = useQuery(GET_REQUESTS);
 
   useSubscription(REQUEST_UPDATED, {

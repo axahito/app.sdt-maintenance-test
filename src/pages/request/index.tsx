@@ -55,7 +55,7 @@ const RequestList = () => {
 
       <Link
         href={"/request/create"}
-        className="fixed lg:relative bottom-8 right-4 lg:bottom-0 lg:right-0 lg:ml-[41.5dvw] lg:mt-4"
+        className="fixed lg:relative bottom-8 right-4 lg:bottom-0 lg:right-0 lg:ml-[42dvw] lg:mt-4 lg:pb-6"
       >
         <button className="rounded-full bg-sdt-primary w-[3rem] h-[3rem] flex justify-center items-center">
           <svg
